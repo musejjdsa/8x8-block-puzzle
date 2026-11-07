@@ -19,6 +19,8 @@ sw.js                       Service worker (root copy; identical to assets/sw.js
 css/
   style.css                 All styling (native CSS, custom properties)
 js/
+  version.js                Single source of truth for the game version
+                            (see "Versioning" below)
   themes.js                 Theme config (palette, board/cell colours, effect picks)
   shapes.js                 Shape definitions (cells + weight by level)
   board.js                  Pure board logic — no DOM, no Three.js
@@ -140,9 +142,35 @@ and expected until the renderer moves to ES modules.
   just Score / Best / Level / Multiplier / Chain plus three icon
   buttons (help, theme, new game) and a tiny offline dot.
 
+## Versioning
+
+The game version is shown in small text at the bottom of the
+screen (and at the end of the How to Play modal), so you can
+always tell which build you are playing.
+
+- **Single source of truth:** `js/version.js` — `const VERSION='1.1.0'`.
+  To release a new version, change `VERSION` there only; the footer
+  and the modal both read it via `[data-version]`, so no markup ever
+  needs editing.
+- **Semantic versioning (MAJOR.MINOR.PATCH):**
+  - PATCH — bug fixes (e.g. the text-selection fix).
+  - MINOR — new features, themes, or clear effects.
+  - MAJOR — breaking changes (save format, controls, layout overhaul).
+
+### History
+
+- **v1.0.0** — GitHub MVP: the first published build (8×8 board,
+  tray, row/column clears, Perfect Clear multiplier, 5 themes,
+  extensible clear effects, PWA/offline).
+- **v1.1.0** — Occlusion fix (placed blocks no longer hidden under
+  the empty-cell layer) + Royal reference layout, How to Play modal
+  with no-scroll viewport-locked layout and no-scroll mobile drag,
+  text-selection disabled while grabbing shapes, and the version
+  label itself.
+
 ## Verification (2026-11-07, split from the exported single file)
 
-- All 21 JS files pass `node --check`; both manifests parse as JSON;
+- All 23 JS files pass `node --check`; both manifests parse as JSON;
   `sw.js` ≡ `assets/sw.js`, `assets/three.min.js` ≡
   `js/vendor/three.min.js` (byte-identical).
 - Every `src`/`href` in `index.html`, every path in
@@ -162,6 +190,9 @@ and expected until the renderer moves to ES modules.
   run failed with `$('#tray').render is not a function` because the
   splitter had stripped the tray's `customElements.define` line; the
   splitter was fixed and the load re-verified clean.
+- v1.1.0 sync: `js/version.js` added; all 23 JS files pass
+  `node --check`; headless load shows `v1.1.0` at the bottom of the
+  screen and in the How to Play modal, with no console errors.
 
 Not verified live: a real-device touch drag (pointer events +
 `touch-action: none` are code-verified and were exercised in the
