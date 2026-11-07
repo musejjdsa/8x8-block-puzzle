@@ -54,4 +54,10 @@ $('#helpBtn').onclick=openHelp;
 $('#helpClose').onclick=closeHelp;
 helpModal.addEventListener('pointerdown',e=>{if(e.target===helpModal)closeHelp();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeHelp();});
+/* Prevent native text selection / drag from interfering with grabbing shapes */
+document.addEventListener('selectstart',e=>{e.preventDefault();});
+document.addEventListener('dragstart',e=>{e.preventDefault();});
+document.onselectstart=()=>false;
+document.querySelector('.wrap')?.addEventListener('selectstart',e=>{e.preventDefault();});
+document.querySelectorAll('img').forEach(img=>{img.draggable=false;img.setAttribute('draggable','false');});
 initDrag();deal();applyTheme();$('#grid').renderer?.clearAll();refresh();
