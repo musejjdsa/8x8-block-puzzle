@@ -13,7 +13,7 @@ const initDrag=()=>{
  document.addEventListener('touchmove',e=>{if(drag)e.preventDefault();},{passive:false});
  document.addEventListener('pointerdown',e=>{const piece=e.target.closest('.piece');if(!piece||state.over)return;const idx=+piece.dataset.idx;const p=state.pieces[idx];if(!p)return;
   state.selected=idx;$('#tray').querySelectorAll('.tray-slot').forEach((s,i)=>s.classList.toggle('selected',i===idx));
-  const ghost=piece.cloneNode(true);ghost.classList.add('drag-ghost');document.body.append(ghost);
+  const ghost=piece.cloneNode(true);ghost.classList.add('drag-ghost');ghost.draggable=false;ghost.setAttribute('draggable','false');ghost.querySelectorAll('*').forEach(n=>{n.draggable=false;});document.body.append(ghost);
   drag={idx,ghost,piece,p,over:null};moveGhost(e,ghost,p);e.preventDefault();});
  const moveGhost=(e,ghost,p)=>{const d=shapeDims(p.shape);ghost.style.left=(e.clientX-d.w*13)+'px';ghost.style.top=(e.clientY-d.h*13-46)+'px';};
  document.addEventListener('pointermove',e=>{if(!drag)return;e.preventDefault();moveGhost(e,drag.ghost,drag.p);
