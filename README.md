@@ -8,7 +8,8 @@ placement scores a **Perfect Clear: +500 × multiplier**. The game ends
 when none of your three pieces fits anywhere.
 
 Five themes / levels: Royal (default), Bubblegum, Ocean, Sunset,
-Lemon — later levels deal bigger pieces.
+Lemon. Pieces are the 7 classic Tetris tetrominoes — I, O, T, S, Z,
+L and J — four blocks each, in fixed dealt orientations; no rotation.
 
 ## Project structure
 
@@ -27,7 +28,9 @@ js/
   scoring.js                Points, combo & Perfect Clear multiplier
   renderer.js               Three.js renderer (board meshes only)
   drag.js                   Drag controller (pointer events, tap-to-select)
-                            + the shared `$` query helper used by main.js
+                            + the shared `$` query helper used by main.js;
+                            drag ghost is board-sized and lifted above
+                            the finger, placement is derived from the ghost
   main.js                   Game state, placement, levels, New Game,
                             help modal, boot (calls initDrag, deal, refresh)
   offline.js                PWA registration + offline stash + HUD pill
@@ -148,7 +151,7 @@ The game version is shown in small text at the bottom of the
 screen (and at the end of the How to Play modal), so you can
 always tell which build you are playing.
 
-- **Single source of truth:** `js/version.js` — `const VERSION='1.1.0'`.
+- **Single source of truth:** `js/version.js` — `const VERSION='1.2.0'`.
   To release a new version, change `VERSION` there only; the footer
   and the modal both read it via `[data-version]`, so no markup ever
   needs editing.
@@ -167,6 +170,13 @@ always tell which build you are playing.
   with no-scroll viewport-locked layout and no-scroll mobile drag,
   text-selection disabled while grabbing shapes, and the version
   label itself.
+- **v1.2.0** — Tetris-only shapes (the 7 classic tetrominoes, 19
+  dealt orientations, every piece exactly 4 blocks) + drag
+  improvements: 20px invisible hit-box padding per piece and
+  tap-anywhere-on-slot grab, board-sized drag ghost (each block one
+  board cell) lifted above the finger (72px touch / 56px pen /
+  14px mouse), placement derived from the ghost so what you see is
+  what drops.
 
 ## Verification (2026-11-07, split from the exported single file)
 
@@ -193,6 +203,13 @@ always tell which build you are playing.
 - v1.1.0 sync: `js/version.js` added; all 23 JS files pass
   `node --check`; headless load shows `v1.1.0` at the bottom of the
   screen and in the How to Play modal, with no console errors.
+- v1.2.0 sync: `js/shapes.js` (Tetris-only, 19 orientations),
+  `js/drag.js` (hit-box, board-sized lifted ghost, ghost-derived
+  placement), `css/style.css`, `index.html` (How to Play Tetris
+  wording), `js/version.js`, `README.md`; all 23 JS files pass
+  `node --check`; SHAPES parses to exactly {I,O,T,S,Z,L,J}, every
+  entry 4 edge-connected cells; headless load shows `v1.2.0`, an
+  empty board, and 3 Tetris tray pieces, with no console errors.
 
 Not verified live: a real-device touch drag (pointer events +
 `touch-action: none` are code-verified and were exercised in the
