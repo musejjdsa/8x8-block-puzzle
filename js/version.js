@@ -7,4 +7,4 @@
    (Classic script, like every other js/ file: a plain global const,
    not an ES-module export — main.js reads VERSION as a global.)
 ============================================================ */
-const VERSION='1.1.0';
+const VERSION='1.2.0';
