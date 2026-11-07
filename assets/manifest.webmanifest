@@ -1,0 +1,32 @@
+{
+  "background_color": "#201e3a",
+  "description": "Drag-and-drop block puzzle on an 8x8 board. Fill rows and columns to clear them, chase combos and Perfect Clears.",
+  "display": "fullscreen",
+  "icons": [
+    {
+      "purpose": "any",
+      "sizes": "192x192",
+      "src": "icon-192.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "any",
+      "sizes": "512x512",
+      "src": "icon-512.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "maskable",
+      "sizes": "512x512",
+      "src": "icon-maskable-512.png",
+      "type": "image/png"
+    }
+  ],
+  "id": "./index.html",
+  "name": "8x8 Block Puzzle",
+  "orientation": "portrait",
+  "scope": "../",
+  "short_name": "Block Puzzle",
+  "start_url": "../index.html",
+  "theme_color": "#201e3a"
+}
