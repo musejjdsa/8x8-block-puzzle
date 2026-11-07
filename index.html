@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+  <meta name="color-scheme" content="light dark"/>
+  <link rel="manifest" href="manifest.webmanifest"/>
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#1d29a8"/>
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1d29a8"/>
+  <meta name="mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="Block Puzzle"/>
+  <link rel="apple-touch-icon" href="assets/icon-180.png"/>
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png"/>
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/icon-512.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <title>8x8 Block Puzzle</title>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><span class="pill" id="offlinePill" data-mode="saving" role="status" aria-label="Offline status"><span class="dot" data-mode="saving"></span><span class="txt">Saving for offline…</span></span><button class="update-btn" id="updateBtn" hidden>↻ Update ready</button><span class="spacer"></span><button class="icon-btn" id="helpBtn" aria-label="How to play" title="How to play">?</button><button class="icon-btn" id="themeBtn" aria-label="Next theme" title="Next theme">🎨</button><button class="icon-btn" id="newBtn" aria-label="New game" title="New game">↻</button></div>
+
+  <game-hud id="hud"></game-hud>
+
+  <div class="board-frame">
+    <block-grid id="grid"></block-grid>
+  </div>
+
+  <shape-tray id="tray"></shape-tray>
+</div>
+<div class="banner" id="banner"></div>
+<div class="modal" id="helpModal" role="dialog" aria-modal="true" aria-labelledby="helpTitle"><div class="modal-card help-card"><button class="modal-close" id="helpClose" aria-label="Close">×</button><h2 id="helpTitle">How to play</h2><ul><li>Drag a piece onto the board — or tap a piece, then tap where it should go. Pieces can't be rotated.</li><li>Fill all 8 cells in a row or a column to clear it. Clearing on consecutive moves builds your combo multiplier.</li><li>Empty the whole board with a placement for a <b>Perfect Clear: +500 × multiplier</b>.</li><li>The game ends when none of your 3 pieces fits anywhere.</li></ul></div></div>
+<div class="modal" id="modal"><div class="modal-card"><p style="font-size:38px;margin:0">🧩</p><h2>No moves left</h2><p style="color:var(--muted);font-weight:800">None of your pieces fits on the board.</p><div class="bigscore" id="finalScore">0</div><p id="finalStats" style="font-weight:800;color:var(--muted)"></p><button class="btn-main" id="againBtn" style="width:100%;border:0;border-radius:14px;padding:14px;font-family:Fredoka,sans-serif;font-weight:700;font-size:16px;cursor:pointer">Play again</button></div></div>
+  <!-- Three.js is self-hosted (assets/three.min.js) so it can be cached for offline play; CDN only as fallback -->
+  <script src="assets/three.min.js"></script>
+  <script>if(!window.THREE){document.write('<script src="https:\/\/cdnjs.cloudflare.com\/ajax\/libs\/three.js\/0.160.0\/three.min.js"><\/script>');}</script>
+  <script src="js/themes.js"></script>
+  <script src="js/shapes.js"></script>
+  <script src="js/board.js"></script>
+  <script src="js/scoring.js"></script>
+  <script src="js/effects/registry.js"></script>
+  <script src="js/effects/row-sweep.js"></script>
+  <script src="js/effects/col-cascade.js"></script>
+  <script src="js/effects/cross-burst.js"></script>
+  <script src="js/effects/chain-finisher.js"></script>
+  <script src="js/effects/perfect-burst.js"></script>
+  <script src="js/effects/effect-selector.js"></script>
+  <script src="js/renderer.js"></script>
+  <script src="js/components/game-hud.js"></script>
+  <script src="js/components/block-grid.js"></script>
+  <script src="js/components/shape-tray.js"></script>
+  <script src="js/drag.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/offline.js"></script>
+</body>
+</html>
