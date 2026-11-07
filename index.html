@@ -19,8 +19,8 @@
   <link rel="stylesheet" href="css/style.css"/>
   <title>8x8 Block Puzzle</title>
 </head>
-<body>
-<div class="wrap">
+<body onselectstart="return false">
+<div class="wrap" onselectstart="return false">
   <div class="topbar"><span class="pill" id="offlinePill" data-mode="saving" role="status" aria-label="Offline status"><span class="dot" data-mode="saving"></span><span class="txt">Saving for offline…</span></span><button class="update-btn" id="updateBtn" hidden>↻ Update ready</button><span class="spacer"></span><button class="icon-btn" id="helpBtn" aria-label="How to play" title="How to play">?</button><button class="icon-btn" id="themeBtn" aria-label="Next theme" title="Next theme">🎨</button><button class="icon-btn" id="newBtn" aria-label="New game" title="New game">↻</button></div>
 
   <game-hud id="hud"></game-hud>
