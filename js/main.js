@@ -60,4 +60,5 @@ document.addEventListener('dragstart',e=>{e.preventDefault();});
 document.onselectstart=()=>false;
 document.querySelector('.wrap')?.addEventListener('selectstart',e=>{e.preventDefault();});
 document.querySelectorAll('img').forEach(img=>{img.draggable=false;img.setAttribute('draggable','false');});
+document.querySelectorAll('[data-version]').forEach(el=>{el.textContent='v'+VERSION;});
 initDrag();deal();applyTheme();$('#grid').renderer?.clearAll();refresh();
