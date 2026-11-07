@@ -13,7 +13,7 @@
     'assets/icon-192.png', 'assets/icon-512.png', 'assets/icon-180.png',
     'assets/icon-maskable-512.png', 'assets/three.min.js',
     'css/style.css',
-    'js/themes.js', 'js/shapes.js', 'js/board.js', 'js/scoring.js',
+    'js/themes.js', 'js/version.js', 'js/shapes.js', 'js/board.js', 'js/scoring.js',
     'js/effects/registry.js', 'js/effects/row-sweep.js',
     'js/effects/col-cascade.js', 'js/effects/cross-burst.js',
     'js/effects/chain-finisher.js', 'js/effects/perfect-burst.js',
